@@ -1948,24 +1948,6 @@ button {
 /* ============================================
    RESPONSIVE DESIGN (v3 Final)
    ============================================ */
-@media (max-width: 1024px) {
-  :root {
-    --section-padding: 90px 0;
-    --container-padding: 0 28px;
-  }
-
-  .about-grid { gap: 50px; }
-  .highlights-grid { grid-template-columns: repeat(2, 1fr); }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-masonry { columns: 3; }
-  .plant-catalogue-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
-}
-
 @media (max-width: 768px) {
   :root {
     --section-padding: 70px 0;
@@ -1980,14 +1962,14 @@ button {
     width: 100%; /* Full screen menu drawer */
     max-width: 100%;
     height: 100vh;
-    background: rgba(10, 30, 18, 0.94); /* Elegant dark-green glassmorphism background */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(10, 30, 18, 0.98); /* Elegant dark-green glassmorphism background */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 100px 40px 40px;
-    gap: 16px;
+    padding: 100px 30px 40px;
+    gap: 12px;
     transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1001;
     overflow-y: auto;
@@ -1997,18 +1979,20 @@ button {
 
   .nav-links a {
     width: 100%;
-    padding: 14px 20px;
-    font-size: 1.25rem;
+    padding: 12px 20px;
+    font-size: 1.2rem;
     font-family: var(--font-heading);
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
     border-radius: var(--radius-md);
+    transition: all 0.3s ease;
   }
 
   .nav-links a:hover,
   .nav-links a.active {
     color: var(--accent-light);
     background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
   }
 
   .nav-links a::after { display: none; }
@@ -2024,6 +2008,7 @@ button {
     height: 48px;
     cursor: pointer;
     z-index: 1005;
+    transition: all 0.3s ease;
   }
   
   .nav-toggle span {
@@ -2034,6 +2019,13 @@ button {
     display: block;
   }
 
+  /* Clear Close circle button when menu is active */
+  .nav-toggle.active {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+  }
+
   .nav-toggle.active span {
     background: var(--white); /* Turns white over full screen drawer */
   }
@@ -2042,34 +2034,57 @@ button {
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
+  /* Smooth Accordion dropdown menu on mobile */
   .dropdown-menu {
     position: static;
     box-shadow: none;
     border: none;
-    padding: 0 0 0 16px;
-    opacity: 1;
+    padding: 0;
+    opacity: 0;
     visibility: visible;
     transform: none;
-    display: none;
+    display: block; /* always block to allow max-height transitions */
+    max-height: 0;
+    overflow: hidden;
     background: transparent;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, padding 0.4s ease;
   }
 
-  .nav-dropdown.open .dropdown-menu { display: block; }
+  .nav-dropdown.open .dropdown-menu {
+    max-height: 300px;
+    opacity: 1;
+    padding: 8px 0 8px 16px;
+  }
   
   .dropdown-menu a {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05rem;
+    padding: 10px 16px;
+  }
+
+  .dropdown-menu a:hover {
+    color: var(--accent-light);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  /* Dropdown arrow rotation */
+  .nav-dropdown .dropdown-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .nav-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
   }
 
   .mobile-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition-base);
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
   }
 
   .mobile-overlay.active {
@@ -2080,7 +2095,7 @@ button {
   /* Top Bar */
   .top-bar .container {
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     text-align: center;
   }
 
@@ -2091,16 +2106,23 @@ button {
     justify-content: center;
   }
 
-  /* Hero Section Mobile Rework */
+  /* Hero Section Mobile Rework - relative block to prevent absolute text overflow */
   .hero {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 100px 20px 60px;
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
+    min-height: 100vh;
   }
 
   .hero-content {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
     max-width: 100%;
+    text-align: center;
+    margin: 0 auto;
   }
 
   .hero-title {
@@ -2109,22 +2131,23 @@ button {
   }
 
   .hero-title-line.line-1 {
-    font-size: clamp(38px, 11vw, 52px);
+    font-size: clamp(36px, 10vw, 50px);
     margin-bottom: 2px;
   }
 
   .hero-title-line.line-2 {
-    font-size: clamp(30px, 9vw, 40px);
+    font-size: clamp(28px, 8vw, 38px);
   }
 
   .hero-quote {
-    font-size: clamp(16px, 4.5vw, 19px);
+    font-size: clamp(15px, 4vw, 18px);
     margin-bottom: 28px;
     line-height: 1.5;
   }
 
   .hero-buttons {
     max-width: 100%;
+    margin: 0 auto;
     gap: 12px;
   }
 
@@ -2173,50 +2196,230 @@ button {
     box-shadow: var(--shadow-green);
   }
 
-  /* About */
+  /* About Section Grid */
   .about-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .about-image img { height: 360px; }
+  .about-image img { height: 320px; }
   .about-content .specializations { grid-template-columns: 1fr; }
+
+  /* Keep badge within layout limits to avoid horizontal overflow scroll */
+  .about-float-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    z-index: 3;
+  }
+  
+  .about-float-badge .badge-number {
+    font-size: 1.8rem;
+  }
 
   .founder-card {
     flex-direction: column;
     text-align: center;
+    padding: 20px;
   }
 
   /* Highlights */
   .highlights-grid { grid-template-columns: 1fr; }
 
-  /* Plant Grid */
-  .plant-catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .plant-catalogue-img { height: 220px; }
+  /* Plant Catalogue Grid Mobile Optimization */
+  .plant-catalogue-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px; /* equal spacing */
+  }
+  
+  .plant-catalogue-img {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+  
+  /* Make catalogue overlay permanently visible on mobile since no hover */
+  .plant-catalogue-overlay {
+    opacity: 1;
+    transform: translateY(0);
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
+    padding: 16px 12px 12px;
+  }
+
+  .plant-catalogue-overlay h4 {
+    font-size: 0.9rem;
+  }
+  
+  .plant-catalogue-overlay p {
+    font-size: 0.75rem;
+  }
+
+  /* Keep zoom magnifier visible but elegant */
+  .plant-catalogue-zoom {
+    opacity: 1;
+    transform: scale(1);
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+    background: rgba(0,0,0,0.4);
+    top: 12px;
+    right: 12px;
+  }
 
   /* Services */
   .services-grid { grid-template-columns: 1fr; }
 
-  /* Gallery */
-  .gallery-masonry { columns: 2; column-gap: 14px; }
+  /* Gallery Masonry Layout Mobile Optimization */
+  .gallery-masonry {
+    columns: 2;
+    column-gap: 16px; /* equal spacing */
+  }
+  
+  .gallery-item {
+    margin-bottom: 16px; /* match horizontal spacing */
+  }
 
-  /* Contact */
+  .gallery-item-overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+  }
+
+  .gallery-zoom-icon {
+    transform: scale(0.9);
+    opacity: 0.85;
+    background: rgba(0,0,0,0.4);
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Contact layout stack */
   .contact-grid { grid-template-columns: 1fr; }
+  .contact-info-card { padding: 30px 20px; }
+  .contact-map { min-height: 300px; }
 
-  /* Footer */
+  /* Footer stack */
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 
-  /* Performance: Disable animations on mobile */
+  /* Global Button Heights for touch friendliness */
+  .btn {
+    min-height: 48px;
+    padding: 12px 28px;
+  }
+
+  /* Tap feedback for interactive elements */
+  .btn:active,
+  .tab-btn:active,
+  .whatsapp-btn:active,
+  .lightbox-close:active,
+  .lightbox-prev:active,
+  .lightbox-next:active,
+  .nav-links a:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.1s ease;
+  }
+
+  /* Lightbox Mobile Adjustments */
+  .lightbox {
+    background: rgba(10, 10, 10, 0.98); /* Luxury near pitch-black background */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 75vh; /* leave vertical viewport space for toolbar buttons */
+    border-radius: 0;
+    box-shadow: none;
+    touch-action: none; /* disable default double-tap zoom & scroll to let JS pan */
+  }
+
+  /* Position close button clearly visible top-right */
+  .lightbox-close {
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.2rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 10002;
+  }
+
+  /* Relocate Next / Prev buttons to a bottom corner layout to prevent obstructing images */
+  .lightbox-prev,
+  .lightbox-next {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    z-index: 10001;
+  }
+
+  .lightbox-prev {
+    left: 20px;
+  }
+
+  .lightbox-next {
+    right: 20px;
+  }
+  
+  .lightbox-prev:hover,
+  .lightbox-next:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Bottom counter aligned with toolbar buttons */
+  .lightbox-counter {
+    bottom: 34px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    z-index: 10001;
+    font-family: var(--font-body);
+  }
+
+  /* hardware-accelerated mobile scroll reveal overrides (vertical only to prevent overflow) */
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+  }
+
+  .reveal.revealed,
+  .reveal-left.revealed,
+  .reveal-right.revealed,
+  .reveal-scale.revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* About section left image slow, elegant fade-up slide reveal */
+  .about-image-wrapper.reveal-left {
+    transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Performance: Disable heavy decorations that cause performance drop on mobile */
   .floating-leaves,
   .about-leaves {
     display: none !important;
   }
 
   .kadiyam-bg img {
-    transform: none !important; /* Disable parallax */
+    transform: none !important; /* Disable parallax on mobile to achieve solid 60fps */
   }
 }
 
@@ -2225,13 +2428,14 @@ button {
   .nav-logo .logo-text { font-size: 1.3rem; }
   .nav-logo .logo-icon { width: 40px; height: 40px; font-size: 1.1rem; }
 
-  .plant-catalogue-grid { grid-template-columns: 1fr; }
-  .plant-catalogue-img { height: 280px; }
+  .plant-catalogue-grid { grid-template-columns: 1fr; gap: 18px; }
+  .plant-catalogue-img { aspect-ratio: 4 / 3; height: auto; }
 
-  .gallery-masonry { columns: 1; }
+  .gallery-masonry { columns: 1; column-gap: 18px; }
+  .gallery-item { margin-bottom: 18px; }
 
   .whatsapp-float { bottom: 20px; right: 20px; }
-  .whatsapp-btn { width: 52px; height: 52px; font-size: 1.5rem; }
+  .whatsapp-btn { width: 56px; height: 56px; font-size: 1.5rem; }
 }
 
 /* ============================================
