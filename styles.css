@@ -378,6 +378,10 @@ button {
   gap: 6px;
 }
 
+.mobile-close {
+  display: none !important;
+}
+
 .nav-links a {
   padding: 8px 18px;
   font-size: 0.88rem;
@@ -2007,25 +2011,56 @@ button {
     -webkit-backdrop-filter: blur(24px);
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 100px 30px 40px;
-    gap: 12px;
+    justify-content: flex-start; /* flex-start prevents scroll cutoff of top items */
+    padding: 110px 30px 40px; /* space for logo and close button */
+    gap: 16px; /* increased spacing for ease of tapping */
     transition: right 0.3s ease;
-    z-index: 1001;
+    z-index: 10000; /* above all content */
     overflow-y: auto;
   }
 
   .nav-links.open { right: 0; }
 
+  .mobile-close {
+    display: flex !important;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 10005; /* higher than drawer */
+    transition: all 0.3s ease;
+  }
+
+  .mobile-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+  }
+
+  /* Hide the hamburger button toggle when menu is open on mobile */
+  .navbar.menu-open .nav-toggle {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .nav-links a {
     width: 100%;
-    padding: 12px 20px;
-    font-size: 1.2rem;
+    padding: 14px 20px; /* larger touch target */
+    font-size: 1.25rem;
     font-family: var(--font-heading);
-    color: rgba(255, 255, 255, 0.85);
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
     border-radius: var(--radius-md);
     transition: all 0.3s ease;
+    display: block;
   }
 
   .nav-links a:hover,
@@ -2137,7 +2172,7 @@ button {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
-    z-index: 1000;
+    z-index: 9999; /* below drawer but above general page content */
     opacity: 0;
     visibility: hidden;
     transition: var(--transition-base);
@@ -2386,7 +2421,7 @@ button {
   /* Show logo on top of the mobile drawer and adapt color to dark background */
   .navbar.menu-open .nav-logo {
     position: relative;
-    z-index: 1005;
+    z-index: 10005; /* higher than drawer */
   }
   .navbar.menu-open .nav-logo .logo-text {
     color: var(--white) !important;

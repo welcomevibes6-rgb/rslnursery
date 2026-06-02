@@ -62,6 +62,15 @@ document.addEventListener('DOMContentLoaded', () => {
     navLogo.addEventListener('click', closeMenu);
   }
 
+  // Close menu on dedicated close button click
+  const mobileClose = document.getElementById('mobileClose');
+  if (mobileClose) {
+    mobileClose.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+
   // Mobile dropdown toggle
   if (navDropdown) {
     const dropdownTrigger = navDropdown.querySelector(':scope > a');
