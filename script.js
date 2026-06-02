@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.classList.add('active');
     navLinks.classList.add('open');
     mobileOverlay.classList.add('active');
+    if (navbar) navbar.classList.add('menu-open');
     document.body.style.overflow = 'hidden';
   }
 
@@ -34,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.classList.remove('active');
     navLinks.classList.remove('open');
     mobileOverlay.classList.remove('active');
+    if (navbar) navbar.classList.remove('menu-open');
     document.body.style.overflow = '';
     // Also close dropdown
     if (navDropdown) navDropdown.classList.remove('open');
@@ -52,6 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileOverlay) {
     mobileOverlay.addEventListener('click', closeMenu);
+  }
+
+  // Close menu on logo click (for mobile drawer state)
+  const navLogo = document.querySelector('.nav-logo');
+  if (navLogo) {
+    navLogo.addEventListener('click', closeMenu);
   }
 
   // Mobile dropdown toggle
@@ -484,6 +492,10 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       }
+    }, { passive: true });
+
+    lightbox.addEventListener('touchcancel', () => {
+      isDragging = false;
     }, { passive: true });
 
     // Double-tap to zoom

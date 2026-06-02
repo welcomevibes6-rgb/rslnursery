@@ -100,6 +100,7 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -2375,9 +2376,27 @@ button {
   .lightbox-close:active,
   .lightbox-prev:active,
   .lightbox-next:active,
-  .nav-links a:active {
+  .nav-links a:active,
+  .plant-catalogue-item:active,
+  .gallery-item:active {
     transform: scale(0.96) !important;
     transition: transform 0.1s ease;
+  }
+
+  /* Show logo on top of the mobile drawer and adapt color to dark background */
+  .navbar.menu-open .nav-logo {
+    position: relative;
+    z-index: 1005;
+  }
+  .navbar.menu-open .nav-logo .logo-text {
+    color: var(--white) !important;
+  }
+  .navbar.menu-open .nav-logo .logo-text span {
+    color: var(--accent-light) !important;
+  }
+  .navbar.menu-open .nav-logo .logo-icon {
+    background: var(--white) !important;
+    color: var(--primary-dark) !important;
   }
 
   /* Lightbox Mobile Adjustments */
