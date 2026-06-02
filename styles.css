@@ -481,9 +481,9 @@ button {
   transition: var(--transition-base);
 }
 
-.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
 .nav-toggle.active span:nth-child(2) { opacity: 0; }
-.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
 /* ============================================
    HERO SECTION – LUXURY LEFT-ALIGNED (v3 Final)
@@ -2069,9 +2069,22 @@ button {
     background: var(--white); /* Turns white over full screen drawer */
   }
 
-  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+  .nav-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
-  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+  .nav-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .nav-dropdown {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-dropdown > a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
 
   /* Smooth Accordion dropdown menu on mobile */
   .dropdown-menu {

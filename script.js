@@ -1,6 +1,5 @@
 /* ============================================
-   RSL NURSERY – PREMIUM INTERACTIONS v2
-   Elegant, slow, luxury animations
+   RSL NURSERY – MOBILE-FIRST INTERACTIONS v3
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,26 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const navDropdown = document.querySelector('.nav-dropdown');
 
   // Sticky navbar scroll effect
+  let lastScroll = 0;
   window.addEventListener('scroll', () => {
     if (window.scrollY > 80) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-  });
+    lastScroll = window.scrollY;
+  }, { passive: true });
 
   // Mobile toggle
-  if (navToggle) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('active');
-      navLinks.classList.toggle('open');
-      mobileOverlay.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-    });
-  }
-
-  if (mobileOverlay) {
-    mobileOverlay.addEventListener('click', closeMenu);
+  function openMenu() {
+    navToggle.classList.add('active');
+    navLinks.classList.add('open');
+    mobileOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   function closeMenu() {
@@ -40,30 +35,57 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.classList.remove('open');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
+    // Also close dropdown
+    if (navDropdown) navDropdown.classList.remove('open');
   }
 
-  // Mobile dropdown
-  if (navDropdown) {
-    navDropdown.querySelector('a').addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        navDropdown.classList.toggle('open');
+  if (navToggle) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (navLinks.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
       }
     });
   }
 
-  // Close menu on link click (mobile)
-  document.querySelectorAll('.nav-links a:not(.nav-dropdown > a)').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) closeMenu();
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener('click', closeMenu);
+  }
+
+  // Mobile dropdown toggle
+  if (navDropdown) {
+    const dropdownTrigger = navDropdown.querySelector(':scope > a');
+    if (dropdownTrigger) {
+      dropdownTrigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          navDropdown.classList.toggle('open');
+        }
+      });
+    }
+  }
+
+  // Close menu on ANY link click inside nav-links
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Don't close if it's the dropdown trigger on mobile
+      if (window.innerWidth <= 768) {
+        const isDropdownTrigger = link.parentElement.classList.contains('nav-dropdown');
+        if (!isDropdownTrigger) {
+          closeMenu();
+        }
+      }
     });
   });
 
-  // Dropdown tab links
+  // Dropdown sub-item links always close menu
   document.querySelectorAll('.dropdown-menu a[data-tab]').forEach(link => {
     link.addEventListener('click', (e) => {
       const tab = e.currentTarget.getAttribute('data-tab');
-      setTimeout(() => switchTab(tab), 400);
+      switchTab(tab);
       if (window.innerWidth <= 768) closeMenu();
     });
   });
@@ -82,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navLink.classList.add('active');
       }
     });
-  });
+  }, { passive: true });
 
 
   // ============ HERO – LETTER BY LETTER ANIMATION ============
@@ -95,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const rslText = 'RSL';
     const nurseryText = 'NURSERY';
 
-    // Split RSL
     rslText.split('').forEach(char => {
       const span = document.createElement('span');
       span.classList.add('hero-letter');
@@ -103,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
       heroTitleRSL.appendChild(span);
     });
 
-    // Split NURSERY
     nurseryText.split('').forEach(char => {
       const span = document.createElement('span');
       span.classList.add('hero-letter');
@@ -114,38 +134,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const rslSpans = heroTitleRSL.querySelectorAll('.hero-letter');
     const nurserySpans = heroTitleNursery.querySelectorAll('.hero-letter');
 
-    let delay = 600; // initial delay after page load
-    let letterDelay = 150; // speed per letter (cinematic reveal)
+    let delay = 600;
+    let letterDelay = 150;
 
-    // Animate RSL first
     rslSpans.forEach((span, i) => {
-      setTimeout(() => {
-        span.classList.add('visible');
-      }, delay + i * letterDelay);
+      setTimeout(() => span.classList.add('visible'), delay + i * letterDelay);
     });
 
-    // Animate NURSERY after RSL completes (with 350ms cinematic break)
     const nurseryStartDelay = delay + rslSpans.length * letterDelay + 350;
     nurserySpans.forEach((span, i) => {
-      setTimeout(() => {
-        span.classList.add('visible');
-      }, nurseryStartDelay + i * letterDelay);
+      setTimeout(() => span.classList.add('visible'), nurseryStartDelay + i * letterDelay);
     });
 
-    // After heading completes, fade in tagline
     const taglineStartDelay = nurseryStartDelay + nurserySpans.length * letterDelay + 400;
     setTimeout(() => {
       if (heroQuote) heroQuote.classList.add('visible');
     }, taglineStartDelay);
 
-    // After tagline completes, fade in buttons
     setTimeout(() => {
       if (heroButtons) heroButtons.classList.add('visible');
     }, taglineStartDelay + 700);
   }
 
 
-  // ============ FLOATING LEAVES (Hero) ============
+  // ============ FLOATING LEAVES (Hero – Desktop only) ============
   const leavesContainer = document.getElementById('floatingLeaves');
   const leafEmojis = ['🍃', '🌿', '☘️', '🌱'];
 
@@ -159,18 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
     leaf.style.animationDuration = (Math.random() * 12 + 14) + 's';
     leaf.style.animationDelay = (Math.random() * 4) + 's';
     leavesContainer.appendChild(leaf);
-
     setTimeout(() => leaf.remove(), 28000);
   }
 
-  // Create initial leaves
   for (let i = 0; i < 10; i++) {
     setTimeout(createLeaf, i * 1200);
   }
   setInterval(createLeaf, 4000);
 
 
-  // ============ ABOUT – FLOATING LEAF PARTICLES ON IMAGE ============
+  // ============ ABOUT LEAVES (Desktop only) ============
   const aboutLeavesContainer = document.getElementById('aboutLeaves');
   const aboutLeafEmojis = ['🍃', '🌿', '☘️'];
 
@@ -184,14 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
     leaf.style.animationDuration = (Math.random() * 8 + 10) + 's';
     leaf.style.animationDelay = (Math.random() * 3) + 's';
     aboutLeavesContainer.appendChild(leaf);
-
     setTimeout(() => leaf.remove(), 20000);
   }
 
-  // Observe about section to start leaf particles
   const aboutSection = document.getElementById('about');
   let aboutLeavesStarted = false;
-
   if (aboutSection) {
     const aboutObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -235,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
           aboutTitleObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
 
     aboutTitleObserver.observe(aboutTitle);
   }
@@ -268,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
           plantTitleObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
 
     plantTitleObserver.observe(plantTitle);
   }
@@ -291,8 +298,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
@@ -318,7 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // ============ LIGHTBOX ============
+  // ============ LIGHTBOX – COMPLETE MOBILE REWRITE ============
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
@@ -328,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxImages = [];
   let lightboxIndex = 0;
 
-  // Zooming & Panning State variables
+  // Zoom & pan state
   let scale = 1;
   let startScale = 1;
   let isDragging = false;
@@ -336,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let translateX = 0, translateY = 0;
   let startTranslateX = 0, startTranslateY = 0;
   let touchStartDist = 0;
-  let touchStartX = 0, touchStartY = 0;
+  let swipeStartX = 0, swipeStartY = 0;
 
   function openLightbox(images, index) {
     lightboxImages = images;
@@ -355,23 +362,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateLightbox() {
     resetZoom();
-    // Smooth transition: fade out, change src, fade in
     lightboxImg.style.opacity = '0';
-    
+    lightboxImg.style.transform = 'scale(0.92)';
+
     setTimeout(() => {
       lightboxImg.src = lightboxImages[lightboxIndex];
       lightboxCounter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
-      
-      lightboxImg.onload = () => {
+
+      const showImage = () => {
         lightboxImg.style.opacity = '1';
-        applyTransform();
+        lightboxImg.style.transform = 'scale(1)';
       };
-      
-      if (lightboxImg.complete) {
-        lightboxImg.style.opacity = '1';
-        applyTransform();
-      }
-    }, 200);
+
+      lightboxImg.onload = showImage;
+      if (lightboxImg.complete) showImage();
+    }, 150);
   }
 
   function lightboxPrevFn() {
@@ -384,13 +389,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateLightbox();
   }
 
-  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-  if (lightboxPrev) lightboxPrev.addEventListener('click', lightboxPrevFn);
-  if (lightboxNext) lightboxNext.addEventListener('click', lightboxNextFn);
+  if (lightboxClose) lightboxClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
+  if (lightboxPrev) lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); lightboxPrevFn(); });
+  if (lightboxNext) lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); lightboxNextFn(); });
 
+  // Close on background click
   if (lightbox) {
     lightbox.addEventListener('click', (e) => {
-      // Close lightbox only when clicking background
       if (e.target === lightbox) closeLightbox();
     });
   }
@@ -403,19 +408,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') lightboxNextFn();
   });
 
-  // Touch zoom, swipe, & pan gesture logic on Lightbox
+  // ---- TOUCH GESTURE SYSTEM ----
   if (lightbox) {
-    // Modal-wide swipe gestures for seamless navigation
     lightbox.addEventListener('touchstart', (e) => {
       if (e.touches.length === 1) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
+        isDragging = true;
+        swipeStartX = e.touches[0].clientX;
+        swipeStartY = e.touches[0].clientY;
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         startTranslateX = translateX;
         startTranslateY = translateY;
-        isDragging = true;
-      } else if (e.touches.length === 2 && e.target === lightboxImg) {
+      } else if (e.touches.length === 2) {
         isDragging = false;
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -425,24 +429,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
 
     lightbox.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 1 && isDragging && scale > 1 && e.target === lightboxImg) {
-        const currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const dx = currentX - startX;
-        const dy = currentY - startY;
+      if (e.touches.length === 1 && isDragging) {
+        if (scale > 1) {
+          // Pan zoomed image
+          e.preventDefault();
+          const dx = e.touches[0].clientX - startX;
+          const dy = e.touches[0].clientY - startY;
+          translateX = startTranslateX + dx;
+          translateY = startTranslateY + dy;
 
-        e.preventDefault();
-        translateX = startTranslateX + dx;
-        translateY = startTranslateY + dy;
-        
-        // Clamp dragging to remain within borders
-        const maxTx = (scale - 1) * (lightboxImg.clientWidth / 2);
-        const maxTy = (scale - 1) * (lightboxImg.clientHeight / 2);
-        translateX = Math.max(-maxTx, Math.min(maxTx, translateX));
-        translateY = Math.max(-maxTy, Math.min(maxTy, translateY));
-        
-        applyTransform();
-      } else if (e.touches.length === 2 && e.target === lightboxImg) {
+          const maxTx = (scale - 1) * (lightboxImg.clientWidth / 2);
+          const maxTy = (scale - 1) * (lightboxImg.clientHeight / 2);
+          translateX = Math.max(-maxTx, Math.min(maxTx, translateX));
+          translateY = Math.max(-maxTy, Math.min(maxTy, translateY));
+
+          applyTransform();
+        }
+        // For swipe, we do nothing during move – we detect on touchend
+      } else if (e.touches.length === 2) {
+        // Pinch zoom
         e.preventDefault();
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -451,7 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
         scale = startScale * (dist / touchStartDist);
         scale = Math.max(1, Math.min(4, scale));
 
-        if (scale === 1) {
+        if (scale <= 1) {
+          scale = 1;
           translateX = 0;
           translateY = 0;
         }
@@ -464,49 +470,49 @@ document.addEventListener('DOMContentLoaded', () => {
         isDragging = false;
         const endX = e.changedTouches[0].clientX;
         const endY = e.changedTouches[0].clientY;
-        const diffX = endX - touchStartX;
-        const diffY = endY - touchStartY;
+        const diffX = endX - swipeStartX;
+        const diffY = endY - swipeStartY;
 
-        // Navigation Swipe Gesture (Only if not zoomed in)
-        if (scale === 1) {
+        // Swipe navigation (only when not zoomed)
+        if (scale <= 1) {
           if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
             if (diffX > 0) {
-              lightboxPrevFn(); // Swipe right -> Previous
+              lightboxPrevFn();
             } else {
-              lightboxNextFn(); // Swipe left -> Next
+              lightboxNextFn();
             }
           }
         }
       }
     }, { passive: true });
 
-    // Double tap to toggle zoom for mobile users
+    // Double-tap to zoom
     if (lightboxImg) {
       let lastTap = 0;
       lightboxImg.addEventListener('touchend', (e) => {
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTap;
-        if (tapLength < 300 && tapLength > 0) {
+        const now = Date.now();
+        if (now - lastTap < 300 && now - lastTap > 0) {
           e.preventDefault();
-          toggleZoom();
+          if (scale > 1) {
+            resetZoom();
+          } else {
+            scale = 2.5;
+            applyTransform();
+          }
         }
-        lastTap = currentTime;
+        lastTap = now;
       });
 
-      // Tap to zoom for mouse/desktop users
+      // Desktop click zoom
       lightboxImg.addEventListener('click', (e) => {
         e.stopPropagation();
-        toggleZoom();
+        if (scale > 1) {
+          resetZoom();
+        } else {
+          scale = 2.5;
+          applyTransform();
+        }
       });
-    }
-  }
-
-  function toggleZoom() {
-    if (scale > 1) {
-      resetZoom();
-    } else {
-      scale = 2.5;
-      applyTransform();
     }
   }
 
@@ -520,18 +526,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyTransform() {
     if (lightboxImg) {
       lightboxImg.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
-      if (scale > 1) {
-        lightboxImg.style.cursor = 'zoom-out';
-      } else {
-        lightboxImg.style.cursor = 'zoom-in';
-      }
+      lightboxImg.style.cursor = scale > 1 ? 'grab' : 'zoom-in';
     }
   }
 
 
   // ============ CLICK HANDLERS – Plant Catalogue Items & Gallery ============
-  
-  // Helper: attach lightbox to all items within a container
+
   function attachLightboxToContainer(containerSelector) {
     const items = document.querySelectorAll(`${containerSelector} .plant-catalogue-item`);
     items.forEach((item, i) => {
@@ -544,7 +545,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Attach to each tab
   attachLightboxToContainer('#tab-outdoor');
   attachLightboxToContainer('#tab-indoor');
   attachLightboxToContainer('#tab-flowering');
@@ -579,47 +579,47 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // ============ PARALLAX EFFECT ============
+  // ============ PARALLAX (Desktop only) ============
   const parallaxSections = document.querySelectorAll('.kadiyam-bg img');
+  if (window.innerWidth > 768) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      parallaxSections.forEach(el => {
+        const section = el.closest('section') || el.closest('.kadiyam-heritage');
+        if (!section) return;
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+          const scrollRelative = scrollY - sectionTop;
+          const parallaxOffset = scrollRelative * 0.15;
+          el.style.transform = `translateY(${parallaxOffset}px) scale(1.08)`;
+        }
+      });
+    }, { passive: true });
+  }
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    parallaxSections.forEach(el => {
-      const section = el.closest('section') || el.closest('.kadiyam-heritage');
-      if (!section) return;
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
 
-      if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
-        const scrollRelative = scrollY - sectionTop;
-        const parallaxOffset = scrollRelative * 0.15;
-        el.style.transform = `translateY(${parallaxOffset}px) scale(1.08)`;
-      }
+  // ============ HIGHLIGHT CARD GLOW (Desktop only) ============
+  if (window.innerWidth > 768) {
+    document.querySelectorAll('.highlight-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(30,91,54,0.05), rgba(255,255,255,0.75) 60%)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.background = 'rgba(255, 255, 255, 0.75)';
+      });
     });
-  }, { passive: true });
+  }
 
 
-  // ============ HIGHLIGHT CARD GLOW EFFECT ============
-  document.querySelectorAll('.highlight-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(30,91,54,0.05), rgba(255,255,255,0.75) 60%)`;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.background = 'rgba(255, 255, 255, 0.75)';
-    });
-  });
-
-
-  // ============ COUNTER ANIMATION (About Badge) ============
+  // ============ COUNTER ANIMATION ============
   const counterEl = document.querySelector('.about-float-badge .badge-number');
   if (counterEl) {
     const targetNum = parseInt(counterEl.textContent);
     let counted = false;
-
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !counted) {
@@ -637,36 +637,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.5 });
-
     counterObserver.observe(counterEl);
   }
 
 
-  // ============ GALLERY ITEM STAGGERED REVEAL ============
+  // ============ GALLERY STAGGERED REVEAL ============
   const galleryItems = document.querySelectorAll('.gallery-item');
-
   const galleryObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('revealed');
-        }, i * 120);
+        setTimeout(() => entry.target.classList.add('revealed'), i * 100);
         galleryObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08 });
-
+  }, { threshold: 0.05 });
   galleryItems.forEach(item => galleryObserver.observe(item));
-
-
-  // ============ SUBTLE NAV HOVER ============
-  document.querySelectorAll('.nav-links > a, .nav-dropdown > a').forEach(link => {
-    link.addEventListener('mouseenter', () => {
-      link.style.transform = 'translateY(-1px)';
-    });
-    link.addEventListener('mouseleave', () => {
-      link.style.transform = 'translateY(0)';
-    });
-  });
 
 });
