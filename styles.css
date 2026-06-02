@@ -1463,14 +1463,43 @@ button {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 10, 0.98);
+  backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition-slow);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Contact Quick Action Buttons (Root Level) */
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.contact-btn {
+  width: 100%;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  transition: var(--transition-base);
+}
+
+@media (min-width: 640px) {
+  .contact-actions {
+    flex-direction: row;
+  }
 }
 
 .lightbox.active {
@@ -1903,41 +1932,45 @@ button {
    ============================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 30px, 0);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal.revealed {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-40px);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(-30px, 0, 0);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal-left.revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(40px);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(30px, 0, 0);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal-right.revealed {
   opacity: 1;
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
 }
 
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.92);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.95);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .reveal-scale.revealed {
@@ -1952,6 +1985,12 @@ button {
   :root {
     --section-padding: 70px 0;
     --container-padding: 0 20px;
+  }
+
+  /* Prevent text overflows globally on mobile */
+  h1, h2, h3, h4, h5, h6, p, a, span {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* Full screen Mobile Drawer with Glassmorphism */
@@ -1970,7 +2009,7 @@ button {
     justify-content: center;
     padding: 100px 30px 40px;
     gap: 12px;
-    transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: right 0.3s ease;
     z-index: 1001;
     overflow-y: auto;
   }
@@ -2053,13 +2092,17 @@ button {
   .nav-dropdown.open .dropdown-menu {
     max-height: 300px;
     opacity: 1;
-    padding: 8px 0 8px 16px;
+    padding: 8px 0;
   }
   
   .dropdown-menu a {
     color: rgba(255, 255, 255, 0.7);
     font-size: 1.05rem;
     padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
 
   .dropdown-menu a:hover {
@@ -2230,14 +2273,14 @@ button {
   /* Highlights */
   .highlights-grid { grid-template-columns: 1fr; }
 
-  /* Plant Catalogue Grid Mobile Optimization */
+  /* Plant Catalogue Grid Mobile Optimization (Strictly 2 Columns) */
   .plant-catalogue-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px; /* equal spacing */
   }
   
   .plant-catalogue-img {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;
     height: auto;
   }
   
@@ -2272,7 +2315,7 @@ button {
   /* Services */
   .services-grid { grid-template-columns: 1fr; }
 
-  /* Gallery Masonry Layout Mobile Optimization */
+  /* Gallery Masonry Layout Mobile Optimization (Strictly 2 Columns) */
   .gallery-masonry {
     columns: 2;
     column-gap: 16px; /* equal spacing */
@@ -2395,7 +2438,7 @@ button {
   .reveal-scale {
     opacity: 0;
     transform: translate3d(0, 24px, 0);
-    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
 
@@ -2428,11 +2471,12 @@ button {
   .nav-logo .logo-text { font-size: 1.3rem; }
   .nav-logo .logo-icon { width: 40px; height: 40px; font-size: 1.1rem; }
 
-  .plant-catalogue-grid { grid-template-columns: 1fr; gap: 18px; }
-  .plant-catalogue-img { aspect-ratio: 4 / 3; height: auto; }
+  /* Keep 2 columns on smaller screens to meet UX specification */
+  .plant-catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .plant-catalogue-img { aspect-ratio: 1 / 1; height: auto; }
 
-  .gallery-masonry { columns: 1; column-gap: 18px; }
-  .gallery-item { margin-bottom: 18px; }
+  .gallery-masonry { columns: 2; column-gap: 12px; }
+  .gallery-item { margin-bottom: 12px; }
 
   .whatsapp-float { bottom: 20px; right: 20px; }
   .whatsapp-btn { width: 56px; height: 56px; font-size: 1.5rem; }

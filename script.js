@@ -403,20 +403,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') lightboxNextFn();
   });
 
-  // Touch zoom, swipe, & pan gesture logic
-  if (lightboxImg) {
-    lightboxImg.addEventListener('touchstart', (e) => {
+  // Touch zoom, swipe, & pan gesture logic on Lightbox
+  if (lightbox) {
+    // Modal-wide swipe gestures for seamless navigation
+    lightbox.addEventListener('touchstart', (e) => {
       if (e.touches.length === 1) {
-        // Single finger: preparation for dragging (pan) or swiping
-        isDragging = true;
-        startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY;
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
         startTranslateX = translateX;
         startTranslateY = translateY;
-      } else if (e.touches.length === 2) {
-        // Double fingers: pinch zoom init
+        isDragging = true;
+      } else if (e.touches.length === 2 && e.target === lightboxImg) {
         isDragging = false;
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
@@ -425,36 +424,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
 
-    lightboxImg.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 1 && isDragging) {
+    lightbox.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 1 && isDragging && scale > 1 && e.target === lightboxImg) {
         const currentX = e.touches[0].clientX;
         const currentY = e.touches[0].clientY;
         const dx = currentX - startX;
         const dy = currentY - startY;
 
-        if (scale > 1) {
-          // Pan image
-          e.preventDefault();
-          translateX = startTranslateX + dx;
-          translateY = startTranslateY + dy;
-          
-          // Clamp dragging to remain within borders (prevent dragging image out of screen)
-          const maxTx = (scale - 1) * (lightboxImg.clientWidth / 2);
-          const maxTy = (scale - 1) * (lightboxImg.clientHeight / 2);
-          translateX = Math.max(-maxTx, Math.min(maxTx, translateX));
-          translateY = Math.max(-maxTy, Math.min(maxTy, translateY));
-          
-          applyTransform();
-        }
-      } else if (e.touches.length === 2) {
-        // Pinch zoom active
+        e.preventDefault();
+        translateX = startTranslateX + dx;
+        translateY = startTranslateY + dy;
+        
+        // Clamp dragging to remain within borders
+        const maxTx = (scale - 1) * (lightboxImg.clientWidth / 2);
+        const maxTy = (scale - 1) * (lightboxImg.clientHeight / 2);
+        translateX = Math.max(-maxTx, Math.min(maxTx, translateX));
+        translateY = Math.max(-maxTy, Math.min(maxTy, translateY));
+        
+        applyTransform();
+      } else if (e.touches.length === 2 && scale > 1 && e.target === lightboxImg) {
         e.preventDefault();
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
         const dist = Math.hypot(dx, dy);
 
         scale = startScale * (dist / touchStartDist);
-        // Clamp zoom factor between 1x and 4x
         scale = Math.max(1, Math.min(4, scale));
 
         if (scale === 1) {
@@ -465,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: false });
 
-    lightboxImg.addEventListener('touchend', (e) => {
+    lightbox.addEventListener('touchend', (e) => {
       if (isDragging) {
         isDragging = false;
         const endX = e.changedTouches[0].clientX;
@@ -473,36 +467,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const diffX = endX - touchStartX;
         const diffY = endY - touchStartY;
 
-        // Only navigate if scale is 1 (not zoomed in)
+        // Navigation Swipe Gesture (Only if not zoomed in)
         if (scale === 1) {
-          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 60) {
+          if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
             if (diffX > 0) {
-              lightboxPrevFn(); // swipe right
+              lightboxPrevFn(); // Swipe right -> Previous
             } else {
-              lightboxNextFn(); // swipe left
+              lightboxNextFn(); // Swipe left -> Next
             }
           }
         }
       }
     }, { passive: true });
 
-    // Double tap to toggle zoom
-    let lastTap = 0;
-    lightboxImg.addEventListener('touchend', (e) => {
-      const currentTime = new Date().getTime();
-      const tapLength = currentTime - lastTap;
-      if (tapLength < 300 && tapLength > 0) {
-        e.preventDefault();
-        toggleZoom();
-      }
-      lastTap = currentTime;
-    });
+    // Double tap to toggle zoom for mobile users
+    if (lightboxImg) {
+      let lastTap = 0;
+      lightboxImg.addEventListener('touchend', (e) => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 300 && tapLength > 0) {
+          e.preventDefault();
+          toggleZoom();
+        }
+        lastTap = currentTime;
+      });
 
-    // Tap to zoom for mouse/desktop users
-    lightboxImg.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleZoom();
-    });
+      // Tap to zoom for mouse/desktop users
+      lightboxImg.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleZoom();
+      });
+    }
   }
 
   function toggleZoom() {
