@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
         translateY = Math.max(-maxTy, Math.min(maxTy, translateY));
         
         applyTransform();
-      } else if (e.touches.length === 2 && scale > 1 && e.target === lightboxImg) {
+      } else if (e.touches.length === 2 && e.target === lightboxImg) {
         e.preventDefault();
         const dx = e.touches[0].clientX - e.touches[1].clientX;
         const dy = e.touches[0].clientY - e.touches[1].clientY;
