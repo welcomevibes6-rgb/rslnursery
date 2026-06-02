@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSL Nursery – Premium Nursery & Landscaping Solutions | Kadiyam</title>
+  <meta name="description" content="RSL Nursery offers premium plant collections, avenue plantations, flowering plants, indoor plants and professional landscaping services from Kadiyam, Andhra Pradesh.">
+  <meta name="keywords" content="RSL Nursery, Kadiyam nursery, plants, landscaping, fruit plants, flowering plants, indoor plants, avenue plants, Andhra Pradesh">
+  <meta name="author" content="Ravipati Surya Chandra Rao">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="RSL Nursery – Premium Nursery & Landscaping Solutions">
+  <meta property="og:description" content="Luxury plant collections, avenue plantations, flowering plants, indoor plants and landscaping services from Kadiyam.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
+</head>
+<body>
+
+  <!-- ============ TOP INFO BAR ============ -->
+  <div class="top-bar" id="top-bar">
+    <div class="container">
+      <div class="top-bar-left">
+        <a href="mailto:suryaravipati801@gmail.com">
+          <span class="icon">📧</span> suryaravipati801@gmail.com
+        </a>
+      </div>
+      <div class="top-bar-right">
+        <a href="tel:9908989205">
+          <span class="icon">📞</span> 9908989205
+        </a>
+        <a href="tel:8074892801">
+          <span class="icon">📞</span> 8074892801
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ STICKY NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">🌿</div>
+        <div class="logo-text">RSL <span>Nursery</span></div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#hero" class="active">Home</a>
+        <a href="#about">About Us</a>
+        <div class="nav-dropdown">
+          <a href="#plant-varieties">
+            Plant Varieties <span class="dropdown-arrow">▼</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="#plant-varieties" data-tab="outdoor"><span class="drop-icon">🌳</span> Outdoor Plants</a>
+            <a href="#plant-varieties" data-tab="flowering"><span class="drop-icon">🌺</span> Flowering Plants</a>
+            <a href="#plant-varieties" data-tab="indoor"><span class="drop-icon">🌿</span> Indoor Plants</a>
+            <a href="#plant-varieties" data-tab="avenue"><span class="drop-icon">🌴</span> Avenue Plants</a>
+            <a href="#plant-varieties" data-tab="ficus"><span class="drop-icon">🍃</span> Ficus Collection</a>
+          </div>
+        </div>
+        <a href="#landscaping">Landscaping Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- ============ HERO SECTION – LUXURY LEFT-ALIGNED ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="image copy 31.png" alt="RSL Nursery – Premium nursery plants from Kadiyam">
+    </div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Floating Leaves -->
+    <div class="floating-leaves" id="floatingLeaves"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <!-- Letter-by-letter title -->
+        <h1 class="hero-title" id="heroTitle">
+          <span class="hero-title-line line-1" id="heroTitleRSL"></span>
+          <span class="hero-title-line line-2" id="heroTitleNursery"></span>
+        </h1>
+        
+        <!-- Quote fades in after title -->
+        <p class="hero-quote" id="heroQuote">Growing Nature, Creating Beautiful Spaces.</p>
+        
+        <!-- Buttons fade in after quote -->
+        <div class="hero-buttons" id="heroButtons">
+          <a href="#plant-varieties" class="btn btn-glass">Explore Plants</a>
+          <a href="#contact" class="btn btn-secondary-dark">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section class="about section-padding" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <!-- Left: Image with leaves -->
+        <div class="about-image-wrapper reveal-left">
+          <div class="about-image">
+            <img src="image copy 5.png" alt="RSL Nursery greenhouse with premium plants" loading="lazy">
+            <div class="about-image-overlay"></div>
+            <div class="about-leaves" id="aboutLeaves"></div>
+          </div>
+          <div class="about-float-badge">
+            <div class="badge-number">10+</div>
+            <div class="badge-text">Years Experience</div>
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="about-content reveal-right">
+          <span class="section-label">About Us</span>
+          <h2 class="section-title about-title-animate" id="aboutTitle"></h2>
+          <div class="gold-line"></div>
+          <p class="section-subtitle">
+            RSL Nursery is one of the trusted nursery businesses located in Kadiapulanka, Kadiyam Mandal, Andhra Pradesh. We specialize in providing the finest quality plants and professional landscaping solutions.
+          </p>
+
+          <div class="specializations">
+            <div class="spec-item">
+              <span class="spec-icon">🍎</span>
+              <span>Fruit Plants</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🌺</span>
+              <span>Flowering Plants</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🌿</span>
+              <span>Indoor Plants</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🌳</span>
+              <span>Outdoor Plants</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🌴</span>
+              <span>Avenue Plants</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🍃</span>
+              <span>Ficus Collections</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-icon">🏡</span>
+              <span>Landscaping Design</span>
+            </div>
+          </div>
+
+          <!-- Founder Card – Glass Style -->
+          <div class="founder-card">
+            <div class="founder-avatar">RC</div>
+            <div class="founder-info">
+              <div class="founder-label">Founder</div>
+              <div class="founder-name">Ravipati Surya Chandra Rao</div>
+              <div class="founder-role">Farmer | Nursery Entrepreneur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HIGHLIGHTS SECTION ============ -->
+  <section class="highlights section-padding" id="highlights">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Expertise</span>
+        <h2 class="section-title">Why Choose RSL Nursery</h2>
+        <div class="gold-line" style="margin:0 auto 16px"></div>
+        <p class="section-subtitle">Trusted quality, diverse collections, and professional landscaping expertise from the heart of Kadiyam.</p>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card reveal" style="transition-delay: 0.1s">
+          <div class="highlight-icon">🌱</div>
+          <h3>All Types of Fruit Plants</h3>
+          <p>Premium fruit plant varieties including mango, guava, pomegranate, and exotic tropical fruits.</p>
+        </div>
+        <div class="highlight-card reveal" style="transition-delay: 0.2s">
+          <div class="highlight-icon">🌺</div>
+          <h3>Flowering Plants Collection</h3>
+          <p>Stunning flowering plants from roses to jasmine, bougainvillea, and seasonal blooms.</p>
+        </div>
+        <div class="highlight-card reveal" style="transition-delay: 0.3s">
+          <div class="highlight-icon">🌴</div>
+          <h3>Avenue Plant Suppliers</h3>
+          <p>Majestic avenue trees perfect for roads, parks, and large-scale plantation projects.</p>
+        </div>
+        <div class="highlight-card reveal" style="transition-delay: 0.4s">
+          <div class="highlight-icon">🏡</div>
+          <h3>Landscaping Designers</h3>
+          <p>Professional landscaping design for villas, resorts, commercial spaces, and gardens.</p>
+        </div>
+        <div class="highlight-card reveal" style="transition-delay: 0.5s">
+          <div class="highlight-icon">🌿</div>
+          <h3>Indoor &amp; Outdoor Plants</h3>
+          <p>Curated selection of indoor purifiers and outdoor ornamental plants for every space.</p>
+        </div>
+        <div class="highlight-card reveal" style="transition-delay: 0.6s">
+          <div class="highlight-icon">🚚</div>
+          <h3>Bulk Plant Supply</h3>
+          <p>Large-scale plant supply for government projects, real estate, and commercial ventures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KADIYAM HERITAGE SECTION ============ -->
+  <section class="kadiyam-heritage" id="kadiyam">
+    <div class="kadiyam-bg">
+      <img src="image copy 6.png" alt="Kadiyam nursery landscape" loading="lazy">
+    </div>
+    <div class="kadiyam-overlay"></div>
+    <div class="container">
+      <div class="kadiyam-content reveal">
+        <span class="section-label">Our Heritage</span>
+        <h2 class="section-title">Heart of Kadiyam Nurseries</h2>
+        <p class="kadiyam-text">
+          Located in Kadiapulanka, Kadiyam Mandal, Andhra Pradesh, RSL Nursery proudly continues the rich nursery tradition of Kadiyam, one of India's most famous nursery hubs known for exceptional plant quality and greenery.
+        </p>
+        <div class="kadiyam-quote">
+          "Kadiyam Grows India's Green Future."
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PLANT VARIETIES – PREMIUM CATALOGUE ============ -->
+  <section class="plant-varieties section-padding" id="plant-varieties">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Our Collection</span>
+        <h2 class="plant-title-animate" id="plantTitle"></h2>
+        <div class="gold-line" style="margin:0 auto 16px"></div>
+        <p class="section-subtitle" style="margin:0 auto">Explore our diverse plant collections, carefully cultivated with love and expertise.</p>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="category-tabs">
+        <button class="tab-btn active" data-tab="outdoor">🌳 Outdoor Plants</button>
+        <button class="tab-btn" data-tab="indoor">🌿 Indoor Plants</button>
+        <button class="tab-btn" data-tab="flowering">🌺 Flowering Plants</button>
+        <button class="tab-btn" data-tab="avenue">🌴 Avenue Plants</button>
+        <button class="tab-btn" data-tab="ficus">🌱 Ficus Collection</button>
+      </div>
+
+      <!-- ========== OUTDOOR PLANTS (Catalogue Grid) ========== -->
+      <div class="tab-content active" id="tab-outdoor">
+        <div class="plant-catalogue-grid">
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 2.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 3.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 4.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 5.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 6.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 7.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 8.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 9.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 10.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 11.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="outdoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 12.png" alt="Outdoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Outdoor Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== INDOOR PLANTS (Catalogue Grid) ========== -->
+      <div class="tab-content" id="tab-indoor">
+        <div class="plant-catalogue-grid">
+          <div class="plant-catalogue-item" data-gallery="indoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 20.png" alt="Indoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Indoor Plant</h4>
+              <p>Perfect for interiors</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="indoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 21.png" alt="Indoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Air Purifying Plant</h4>
+              <p>Natural filtration</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="indoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 22.png" alt="Indoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Decorative Plant</h4>
+              <p>Elegant greenery</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="indoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 23.png" alt="Indoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Exotic Variety</h4>
+              <p>Unique collection</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="indoor">
+            <div class="plant-catalogue-img">
+              <img src="image copy 24.png" alt="Indoor Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Low-Maintenance Plant</h4>
+              <p>Easy care</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== FLOWERING PLANTS (Catalogue Grid) ========== -->
+      <div class="tab-content" id="tab-flowering">
+        <div class="plant-catalogue-grid">
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 13.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Vibrant blooms</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 14.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Seasonal beauty</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 15.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Premium quality</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 16.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Garden favourite</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 17.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Exotic blooms</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 18.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Fragrant variety</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="flowering">
+            <div class="plant-catalogue-img">
+              <img src="image copy 19.png" alt="Flowering Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Flowering Plant</h4>
+              <p>Rare collection</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== AVENUE PLANTS (Catalogue Grid) ========== -->
+      <div class="tab-content" id="tab-avenue">
+        <div class="plant-catalogue-grid">
+          <div class="plant-catalogue-item" data-gallery="avenue">
+            <div class="plant-catalogue-img">
+              <img src="image copy 25.png" alt="Avenue Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Majestic Avenue Tree</h4>
+              <p>Roads &amp; parks</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="avenue">
+            <div class="plant-catalogue-img">
+              <img src="image copy 26.png" alt="Avenue Plant" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Premium Avenue Tree</h4>
+              <p>Fast-growing specimen</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== FICUS COLLECTION (Catalogue Grid) ========== -->
+      <div class="tab-content" id="tab-ficus">
+        <div class="plant-catalogue-grid">
+          <div class="plant-catalogue-item" data-gallery="ficus">
+            <div class="plant-catalogue-img">
+              <img src="image copy 27.png" alt="Ficus Variety" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Ficus Specimen</h4>
+              <p>Premium variety</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="ficus">
+            <div class="plant-catalogue-img">
+              <img src="image copy 28.png" alt="Ficus Variety" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Premium Ficus</h4>
+              <p>Rare collection</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="ficus">
+            <div class="plant-catalogue-img">
+              <img src="image copy 29.png" alt="Ficus Variety" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Exotic Ficus</h4>
+              <p>Unique specimen</p>
+            </div>
+          </div>
+          <div class="plant-catalogue-item" data-gallery="ficus">
+            <div class="plant-catalogue-img">
+              <img src="image copy 30.png" alt="Ficus Variety" loading="lazy">
+              <div class="plant-catalogue-zoom">🔍</div>
+            </div>
+            <div class="plant-catalogue-overlay">
+              <h4>Rare Ficus</h4>
+              <p>Collector's choice</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LANDSCAPING SERVICES – REDESIGNED ============ -->
+  <section class="landscaping section-padding" id="landscaping">
+    <!-- Background image with blur -->
+    <div class="landscaping-bg">
+      <img src="image copy 7.png" alt="Landscaping background" loading="lazy">
+    </div>
+    <div class="landscaping-overlay"></div>
+
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Our Services</span>
+        <h2 class="section-title">Landscaping Services</h2>
+        <div class="gold-line" style="margin:0 auto 16px"></div>
+        <p class="section-subtitle">Professional landscaping solutions to transform any space into a green paradise.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <div class="service-icon">🌿</div>
+          <h3>Garden Design</h3>
+          <p>Custom garden designs tailored to your space, preferences, and lifestyle needs.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.2s">
+          <div class="service-icon">🏡</div>
+          <h3>Villa Landscaping</h3>
+          <p>Luxurious villa landscaping with premium plant selections and artistic layouts.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.3s">
+          <div class="service-icon">🏢</div>
+          <h3>Commercial Landscaping</h3>
+          <p>Professional green spaces for offices, malls, tech parks, and commercial complexes.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.4s">
+          <div class="service-icon">🏖️</div>
+          <h3>Resort Landscaping</h3>
+          <p>Create tropical paradise landscapes for resorts, hotels, and hospitality venues.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.5s">
+          <div class="service-icon">✂️</div>
+          <h3>Plant Maintenance</h3>
+          <p>Regular maintenance, pruning, and care services to keep your garden thriving.</p>
+        </div>
+        <div class="service-card reveal" style="transition-delay:0.6s">
+          <div class="service-icon">🌴</div>
+          <h3>Avenue Plantation</h3>
+          <p>Large-scale avenue tree plantation for roads, highways, and municipal projects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY SECTION – IMPROVED ============ -->
+  <section class="gallery section-padding" id="gallery">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Visual Showcase</span>
+        <h2 class="section-title">Our Gallery</h2>
+        <div class="gold-line" style="margin:0 auto 16px"></div>
+        <p class="section-subtitle">A curated collection of our finest plants and landscaping projects.</p>
+      </div>
+
+      <div class="gallery-masonry">
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image.png" alt="Gallery Image 1" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 2.png" alt="Gallery Image 2" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 4.png" alt="Gallery Image 3" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 6.png" alt="Gallery Image 4" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 8.png" alt="Gallery Image 5" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 10.png" alt="Gallery Image 6" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 13.png" alt="Gallery Image 7" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 15.png" alt="Gallery Image 8" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 18.png" alt="Gallery Image 9" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 20.png" alt="Gallery Image 10" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 22.png" alt="Gallery Image 11" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 25.png" alt="Gallery Image 12" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 28.png" alt="Gallery Image 13" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-gallery="gallery">
+          <img src="image copy 30.png" alt="Gallery Image 14" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-zoom-icon">🔍</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA SECTION ============ -->
+  <section class="cta-section" id="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-pattern"></div>
+    <div class="container">
+      <div class="cta-content reveal">
+        <h2>Ready to Transform Your Space?</h2>
+        <p>Explore premium plants and professional landscaping solutions from RSL Nursery.</p>
+        <div class="cta-buttons">
+          <a href="#contact" class="btn btn-gold">📞 Contact Us</a>
+          <a href="https://wa.me/919908989205?text=Hello%20RSL%20Nursery%2C%20I%20would%20like%20information%20about%20your%20plants%20and%20landscaping%20services." class="btn btn-secondary-dark" target="_blank" rel="noopener">
+            💬 WhatsApp Order
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT SECTION ============ -->
+  <section class="contact section-padding" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title">Contact Us</h2>
+        <div class="gold-line" style="margin:0 auto 16px"></div>
+        <p class="section-subtitle">We'd love to hear from you. Reach out for inquiries, orders, or landscaping consultations.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Left: Info Card -->
+        <div class="contact-info-card reveal-left">
+          <h3>Contact Information</h3>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <div class="label">Address</div>
+              <div class="value">Kadiapulanka, Kadiyam Mandal, Andhra Pradesh</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <div class="label">Phone</div>
+              <div class="value">
+                <a href="tel:9908989205">9908989205</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <div class="label">Alternate Phone</div>
+              <div class="value">
+                <a href="tel:8074892801">8074892801</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-item-text">
+              <div class="label">Email</div>
+              <div class="value">
+                <a href="mailto:suryaravipati801@gmail.com">suryaravipati801@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div class="contact-item-text">
+              <div class="label">WhatsApp Orders</div>
+              <div class="value">
+                <a href="https://wa.me/919908989205?text=Hello%20RSL%20Nursery%2C%20I%20would%20like%20information%20about%20your%20plants%20and%20landscaping%20services." target="_blank" rel="noopener">
+                  9908989205
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Map -->
+        <div class="contact-map reveal-right">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15282.69!2d81.9!3d16.92!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37a0f98e5f94e9%3A0x8e7e23eb8f85b1a!2sKadiyam%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="RSL Nursery Location - Kadiapulanka, Kadiyam">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">RSL <span>Nursery</span></div>
+          <div class="footer-tagline">"Growing Nature, Creating Beautiful Spaces."</div>
+          <p class="footer-desc">
+            One of the trusted nursery businesses from Kadiyam, Andhra Pradesh. Offering premium plants and professional landscaping services.
+          </p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="YouTube">🎬</a>
+            <a href="https://wa.me/919908989205" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <div class="footer-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#plant-varieties">Plant Varieties</a>
+            <a href="#landscaping">Landscaping</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact Us</a>
+          </div>
+        </div>
+
+        <!-- Plant Categories -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Plant Categories</h4>
+          <div class="footer-links">
+            <a href="#plant-varieties">Outdoor Plants</a>
+            <a href="#plant-varieties">Flowering Plants</a>
+            <a href="#plant-varieties">Indoor Plants</a>
+            <a href="#plant-varieties">Avenue Plants</a>
+            <a href="#plant-varieties">Ficus Collection</a>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact Info</h4>
+          <div class="footer-contact-item">
+            <span class="f-icon">📍</span>
+            <span>Kadiapulanka, Kadiyam Mandal, Andhra Pradesh</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="f-icon">📞</span>
+            <span><a href="tel:9908989205">9908989205</a> | <a href="tel:8074892801">8074892801</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="f-icon">📧</span>
+            <span>suryaravipati801@gmail.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 <span>RSL Nursery</span>. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+  <div class="whatsapp-float" id="whatsappFloat">
+    <a href="https://wa.me/919908989205?text=Hello%20RSL%20Nursery%2C%20I%20would%20like%20information%20about%20your%20plants%20and%20landscaping%20services."
+       class="whatsapp-btn"
+       target="_blank"
+       rel="noopener"
+       aria-label="Chat on WhatsApp">
+      💬
+    </a>
+    <div class="whatsapp-tooltip">Chat with us!</div>
+  </div>
+
+  <!-- ============ LIGHTBOX MODAL ============ -->
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Lightbox Image" class="lightbox-img" id="lightboxImg">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox">✕</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image">◀</button>
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next image">▶</button>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="script.js"></script>
+</body>
+</html>
