@@ -2484,8 +2484,8 @@ button {
   .nav-logo .logo-text { font-size: 1.3rem; }
   .nav-logo .logo-icon { width: 40px; height: 40px; font-size: 1.1rem; }
 
-  /* Keep 2 columns on smaller screens to meet UX specification */
-  .plant-catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  /* 1 column on mobile to meet updated specifications */
+  .plant-catalogue-grid { grid-template-columns: 1fr; gap: 20px; }
   .plant-catalogue-img { aspect-ratio: 1 / 1; height: auto; }
 
   .gallery-masonry { columns: 2; column-gap: 12px; }
