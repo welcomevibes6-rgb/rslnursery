@@ -77,9 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dropdownTrigger) {
       dropdownTrigger.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
-          e.preventDefault();
-          e.stopPropagation();
-          navDropdown.classList.toggle('open');
+          // Bypassed on mobile to act as a direct section link
         }
       });
     }
@@ -88,12 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close menu on ANY link click inside nav-links
   document.querySelectorAll('#navLinks a').forEach(link => {
     link.addEventListener('click', (e) => {
-      // Don't close if it's the dropdown trigger on mobile
       if (window.innerWidth <= 768) {
-        const isDropdownTrigger = link.parentElement.classList.contains('nav-dropdown');
-        if (!isDropdownTrigger) {
-          closeMenu();
-        }
+        closeMenu();
       }
     });
   });
@@ -171,6 +165,46 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       if (heroButtons) heroButtons.classList.add('visible');
     }, taglineStartDelay + 700);
+  }
+
+
+  // ============ HERO BACKGROUND CAROUSEL ============
+  const heroSlides = document.querySelectorAll('.hero-slide');
+  let heroCurrentSlide = 0;
+  const heroSlideInterval = 6000; // 6 seconds per slide
+  let heroTimer = null;
+
+  function heroNextSlide() {
+    if (heroSlides.length < 2) return;
+    heroSlides[heroCurrentSlide].classList.remove('active');
+    heroCurrentSlide = (heroCurrentSlide + 1) % heroSlides.length;
+    heroSlides[heroCurrentSlide].classList.add('active');
+  }
+
+  function startHeroCarousel() {
+    if (heroTimer) return;
+    heroTimer = setInterval(heroNextSlide, heroSlideInterval);
+  }
+
+  function stopHeroCarousel() {
+    if (heroTimer) {
+      clearInterval(heroTimer);
+      heroTimer = null;
+    }
+  }
+
+  // Start carousel after initial page-load animations finish (~5s)
+  if (heroSlides.length > 1) {
+    setTimeout(startHeroCarousel, 5000);
+
+    // Pause when tab is hidden to save resources
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopHeroCarousel();
+      } else {
+        startHeroCarousel();
+      }
+    });
   }
 
 

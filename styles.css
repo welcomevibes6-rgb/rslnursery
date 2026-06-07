@@ -351,26 +351,17 @@ button {
   gap: 12px;
 }
 
-.nav-logo .logo-icon {
-  width: 46px;
-  height: 46px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  font-size: 1.3rem;
+.nav-logo-img {
+  height: 52px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform var(--transition-base), filter var(--transition-base);
 }
 
-.nav-logo .logo-text {
-  font-family: var(--font-heading);
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: var(--primary-dark);
+.nav-logo:hover .nav-logo-img {
+  transform: scale(1.04);
 }
-
-.nav-logo .logo-text span { color: var(--accent); }
 
 .nav-links {
   display: flex;
@@ -378,7 +369,8 @@ button {
   gap: 6px;
 }
 
-.mobile-close {
+.mobile-close,
+.mobile-menu-header {
   display: none !important;
 }
 
@@ -505,23 +497,39 @@ button {
   z-index: 0;
 }
 
-.hero-bg img {
+/* ---- Hero Carousel Slides ---- */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transform-origin: center center;
-  opacity: 0;
-  animation-fill-mode: forwards;
 }
 
-/* Smooth fade-in on load and Ken Burns */
-.hero-bg img {
-  animation: heroFadeIn 2s ease forwards, heroKenBurns 30s ease-in-out 2s infinite alternate;
+/* Ken Burns zoom on active slide */
+.hero-slide.active img {
+  animation: heroKenBurns 28s ease-in-out infinite alternate;
+}
+
+/* Initial page-load fade-in for the very first slide */
+.hero-slide.active:first-child img {
+  animation: heroFadeIn 2s ease forwards, heroKenBurns 28s ease-in-out 2s infinite alternate;
 }
 
 @keyframes heroFadeIn {
   from { opacity: 0; transform: scale(1.04); }
-  to { opacity: 1; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 /* Subtle dark gradient overlay from left to support text legibility */
@@ -2423,15 +2431,8 @@ button {
     position: relative;
     z-index: 10005; /* higher than drawer */
   }
-  .navbar.menu-open .nav-logo .logo-text {
-    color: var(--white) !important;
-  }
-  .navbar.menu-open .nav-logo .logo-text span {
-    color: var(--accent-light) !important;
-  }
-  .navbar.menu-open .nav-logo .logo-icon {
-    background: var(--white) !important;
-    color: var(--primary-dark) !important;
+  .navbar.menu-open .nav-logo .nav-logo-img {
+    filter: brightness(0) invert(1);
   }
 
   /* Lightbox Mobile Adjustments */
@@ -2535,8 +2536,7 @@ button {
 
 @media (max-width: 480px) {
   .navbar .container { height: 64px; }
-  .nav-logo .logo-text { font-size: 1.3rem; }
-  .nav-logo .logo-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+  .nav-logo-img { height: 40px; }
 
   /* 1 column on mobile to meet updated specifications */
   .plant-catalogue-grid { grid-template-columns: 1fr; gap: 20px; }

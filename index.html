@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=3.5">
+  <link rel="stylesheet" href="styles.css?v=3.6">
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>">
@@ -49,12 +49,14 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="nav-logo">
-        <div class="logo-icon">🌿</div>
-        <div class="logo-text">RSL <span>Nursery</span></div>
+        <img src="image copy 32.png" alt="RSL Nursery Logo" class="nav-logo-img">
       </a>
 
       <div class="nav-links" id="navLinks">
-        <button class="mobile-close" id="mobileClose" aria-label="Close Navigation">✕</button>
+        <div class="mobile-menu-header">
+          <div class="logo-text">RSL <span>Nursery</span></div>
+          <button class="mobile-close" id="mobileClose" aria-label="Close Navigation">✕</button>
+        </div>
         <a href="#hero" class="active">Home</a>
         <a href="#about">About Us</a>
         <div class="nav-dropdown">
@@ -87,8 +89,13 @@
 
   <!-- ============ HERO SECTION – LUXURY LEFT-ALIGNED ============ -->
   <section class="hero" id="hero">
-    <div class="hero-bg">
-      <img src="image copy 31.png" alt="RSL Nursery – Premium nursery plants from Kadiyam">
+    <div class="hero-bg" id="heroBg">
+      <div class="hero-slide active">
+        <img src="image copy 31.png" alt="RSL Nursery – Premium nursery plants from Kadiyam">
+      </div>
+      <div class="hero-slide">
+        <img src="image copy 33.png" alt="RSL Nursery – Vibrant flowering plants collection from Kadiyam">
+      </div>
     </div>
     <div class="hero-overlay"></div>
     
@@ -968,6 +975,6 @@
   </div>
 
   <!-- ============ SCRIPTS ============ -->
-  <script src="script.js?v=3.5"></script>
+  <script src="script.js?v=3.6"></script>
 </body>
 </html>
